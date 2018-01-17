@@ -1,9 +1,10 @@
 class UI {
   constructor() {
+    // Grab target element
     this.profile = document.getElementById('profile');
     
   }
-  
+  // Generate html to show profile
   showProfile(user) {
     this.profile.innerHTML = `
       <div class="card card-body mb-3">
@@ -30,6 +31,42 @@ class UI {
       <h3 class="page-heading mb-3">Latest Repos</h3>
       <div class="repos"></div>
     `;
+  }
+  
+  // Clear display when input cleared
+  clearProfile() {
+    this.profile.innerHTML = '';
+  }
+  
+  // Show alert 
+  showAlert(message, messageClasses) {
+    // Clear any existing alerts 
+    this.clearAlert();
+    // Create div 
+    const div = document.createElement('div');
+    // Add classes
+    div.className = messageClasses;
+    // Add text 
+    div.appendChild(document.createTextNode(message));
+    // Get parent element 
+    const container = document.querySelector('.searchContainer');
+    // Get sibling element 
+    const search = document.querySelector('.search');
+    // Insert alert 
+    container.insertBefore(div, search);
     
+    // Timeout after 3s 
+    setTimeout(() => {
+      this.clearAlert();
+    }, 3000);
+  }
+  
+  // Clear alert 
+  clearAlert() {
+    const currentAlert = document.querySelector('.alert');
+    
+    if (currentAlert) {
+      currentAlert.remove();
+    }
   }
 }
