@@ -28,11 +28,37 @@ class UI {
           </div>        
         </div>
       </div>
-      <h3 class="page-heading mb-3">Latest Repos</h3>
-      <div class="repos"></div>
     `;
   }
   
+  // Show repos 
+  showRepos(repos) {
+    let output = `
+      <h3 class="page-heading mb-3">Latest Repos</h3>
+      `;
+    
+    repos.forEach(function (repo) {
+      output += `
+        <div class="card card-body mb-2">
+        <div className="row">
+          <div className="col-md-6">
+            <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+          </div>
+          <div className="col-md-6">
+            <span class="badge badge-primary">Stars: ${repo.stargazers_count}</span>
+            <span class="badge badge-secondary">Watchers: ${repo.watchers_count}</span>
+            <span class="badge badge-success">Forks: ${repo.forks_count}</span>          
+          </div>
+        </div>
+      </div>
+      `;
+    });
+    
+    // Output repos 
+    const reposList = document.getElementById('repos');
+    reposList.innerHTML = output;
+  }
+    
   // Clear display when input cleared
   clearProfile() {
     this.profile.innerHTML = '';
